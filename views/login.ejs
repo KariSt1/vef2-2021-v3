@@ -2,7 +2,24 @@
 
 <h1>Innskráning</h1>
 
+<form method="post" class="login" action="/admin/login" enctype="application/x-www-form-urlencoded">
 
+  <div class="field">
+    <label for="username">Notendanafn</label>
+    <input type="text" name="username" id="username" value="<%= username %>" class="">
+  </div>
+
+  <div class="field">
+    <label for="password">Lykilorð</label>
+    <input type="password" name="password" id="password" value="<%= password %>" class="">
+  </div>
+
+  <% if (failureMessage !== '') { %>
+    <p class="login__failure"><%= failureMessage %></p>
+    <% } %>
+
+  <button class="login__button">Innskrá</button>
+</form>
 
 <a href="/">Til baka</a>
 

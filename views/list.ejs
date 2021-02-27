@@ -1,2 +1,46 @@
-
-
+<section class="registrations">
+  <h2 class="registrations__title">Undirskriftir</h2>
+  <p class="registrations__count">Fjöldi undirskrifta: <%= totalSignatures.count %></p>
+  <% if (registrations.length === 0) { %>
+    <p class="registrations__empty">Engar undirskriftir.</p>
+  <% } else { %>
+    <table class="registrations__table" cellpadding="0">
+      <tr>
+        <th>Dags</th>
+        <th>Nafn</th>
+        <th>Athugasemd</th>
+        <% if(typeof username != 'undefined') { %>
+          <th>Eyða</th>
+        <% } %>
+      </tr>
+      <% registrations.forEach((row) => { %>
+        <tr>
+          <td class="date"><%= formatDate(row.signed) %></td>
+          <td class="name"><%= row.anonymous ? 'Nafnlaust' : row.name %></td>
+          <td class="comment"><%= row.comment %></td>
+          <% if(typeof username != 'undefined') { %>
+            <td class="delete">
+              <form class="delete" method="post" action="/admin/delete/<%= row.id %>" enctype="application/x-www-form-urlencoded">
+                <button class="delete__button">Eyða</button>
+              </form>
+            </td>
+          <% } %>
+        </tr>
+      <% }) %>
+      </tr>
+    </table>
+  <% } %>
+  <div class="registrations__page">
+    <% if (links.prev) { %>
+      <a href="<%= links.prev.href %>">Fyrri síða</a>
+    <% } else { %>
+      <p>Fyrri síða</p>
+    <% } %> 
+    <p>Síða <%= pageCount.currentPage %> af <%= pageCount.lastPage %></p>
+    <% if (links.next) { %>
+      <a href="<%= links.next.href %>">Næsta síða</a>
+    <% } else { %>
+      <p>Næsta síða</p>
+    <% } %> 
+  </div>
+</section>
