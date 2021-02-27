@@ -1,6 +1,5 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
-import faker from 'faker';
 
 dotenv.config();
 
@@ -98,44 +97,6 @@ export async function countSignatures() {
   }
 
   return result;
-}
-
-function makeID() {
-  let id = '';
-  const numbers = '0123456789';
-  for (let i = 0; i < 10; i++) { // eslint-disable-line
-    id += numbers.charAt(Math.floor(Math.random() * numbers.length));
-  }
-  return id;
-}
-
-export async function mock(n) {
-  for (let i = 0; i < n; i++) { // eslint-disable-line
-    const name = faker.name.findName();
-    const nationalId = makeID();
-    let comment = '';
-    let anonymous = false;
-    if (Math.random() >= 0.5) {
-      comment = faker.lorem.sentence();
-      anonymous = true;
-    }
-    const twoWeeksAgo = new Date(Date.now() - 12096e5); // 12096e5 is two weeks in milliseconds
-    const signed = faker.date.between(twoWeeksAgo, new Date());
-
-    const q = `
-      INSERT INTO signatures
-        (name, nationalId, comment, anonymous, signed)
-      VALUES
-        ($1, $2, $3, $4, $5);
-    `;
-    const values = [name, nationalId, comment, anonymous, signed];
-
-    try {
-      await query(q, values); // eslint-disable-line
-    } catch (e) {
-      console.error('Error inserting signature', e);
-    }
-  }
 }
 
 // Helper to remove pg from the event loop
