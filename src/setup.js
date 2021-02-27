@@ -4,6 +4,9 @@ import { query, end } from './db.js';
 
 const schemaFile = './sql/schema.sql';
 
+/**
+ * Býr til random 10 stafa kennitölu
+ */
 function makeID() {
   let id = '';
   const numbers = '0123456789';
@@ -13,6 +16,10 @@ function makeID() {
   return id;
 }
 
+/**
+ * Býr til n undirskriftir og setur þær í gagnagrunninn
+ * @param {int} n Fjöldi undirskrifta
+ */
 async function mock(n) {
   for (let i = 0; i < n; i++) { // eslint-disable-line
     const name = faker.name.findName();

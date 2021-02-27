@@ -5,6 +5,12 @@ import { query, list, countSignatures } from './db.js';
 
 export const router = express.Router();
 
+/**
+ * Ósamstilltur route handler sem birtir admin síðu
+ * @param {object} req Request hlutur
+ * @param {object} res Response hlutur
+ * @returns {string} Admin síðu
+ */
 async function admin(req, res) {
   const { username } = req.user;
 
@@ -42,6 +48,12 @@ async function admin(req, res) {
   });
 }
 
+/**
+ * Ósamstilltur route handler sem admin login síðu
+ * @param {object} req Request hlutur
+ * @param {object} res Response hlutur
+ * @returns {string} Login síðu
+ */
 async function login(req, res) {
   let failureMessage = '';
   if (typeof req.session.messages !== 'undefined') {
@@ -57,6 +69,11 @@ async function login(req, res) {
   });
 }
 
+/**
+ * Ósamstilltur route handler eyðir ákveðinni undirskrift
+ * @param {object} req Request hlutur
+ * @param {object} res Response hlutur
+ */
 async function deleteSignature(req, res) {
   const { id } = req.params;
   query('DELETE FROM signatures WHERE ID=$1', [id]);

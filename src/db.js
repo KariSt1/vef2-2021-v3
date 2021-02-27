@@ -18,6 +18,13 @@ pool.on('error', (err) => {
   process.exit(-1);
 });
 
+/**
+ * Framvkæmir SQL skipun á gagnagrunn sem keyrir á DATABASE_URL
+ * sem er skilgreint í .env
+ * @param {String} q Query til að keyra
+ * @param array} values Fylki af gildum fyrir query
+ * @returns {object} Hlut með niðurstöðu af því að keyra fyrirspurn
+ */
 export async function query(_query, values = []) {
   const client = await pool.connect();
 

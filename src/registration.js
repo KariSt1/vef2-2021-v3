@@ -7,6 +7,12 @@ import { catchErrors } from './utils.js';
 
 export const router = express.Router();
 
+/**
+ * Ósamstilltur route handler fyrir undirskriftir
+ * @param {object} req Request hlutur
+ * @param {object} res Response hlutur
+ * @returns {string} Undirskriftarsíðu
+ */
 async function index(req, res) {
   const errors = [];
   const formData = {
